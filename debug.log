@@ -1,0 +1,12 @@
+INFO 2025-05-28 11:46:36,438 autoreload 20300 22568 Watching for file changes with StatReloader
+INFO 2025-05-28 11:46:36,689 autoreload 21392 26948 Watching for file changes with StatReloader
+INFO 2025-05-28 11:46:36,750 autoreload 14116 32396 Watching for file changes with StatReloader
+INFO 2025-05-28 11:47:53,845 autoreload 20300 22568 C:\Users\Nikhil\Music\Start 2\Last cursor saved\RRRR\auth_project\accounts\face_recognition_utils.py changed, reloading.
+INFO 2025-05-28 11:47:54,348 autoreload 21392 26948 C:\Users\Nikhil\Music\Start 2\Last cursor saved\RRRR\auth_project\accounts\face_recognition_utils.py changed, reloading.
+INFO 2025-05-28 11:47:54,349 autoreload 14116 32396 C:\Users\Nikhil\Music\Start 2\Last cursor saved\RRRR\auth_project\accounts\face_recognition_utils.py changed, reloading.
+INFO 2025-05-28 11:47:54,408 autoreload 9864 10212 Watching for file changes with StatReloader
+INFO 2025-05-28 11:47:54,969 autoreload 22908 14344 Watching for file changes with StatReloader
+INFO 2025-05-28 11:47:54,970 autoreload 20972 13832 Watching for file changes with StatReloader
+INFO 2025-05-28 11:48:57,469 autoreload 20972 13832 C:\Users\Nikhil\Music\Start 2\Last cursor saved\RRRR\auth_project\accounts\face_recognition_utils.py changed, reloading.
+INFO 2025-05-28 11:48:57,485 autoreload 22908 14344 C:\Users\Nikhil\Music\Start 2\Last cursor saved\RRRR\auth_project\auth_project\settings.py changed, reloading.
+INFO 2025-05-28 11:48:57,693 autoreload 9864 10212 C:\Users\Nikhil\Music\Start 2\Last cursor saved\RRRR\auth_project\auth_project\settings.py changed, reloading.

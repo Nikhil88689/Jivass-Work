@@ -1,0 +1,203 @@
+{% extends 'users/base.html' %}
+
+{% block title %}User Details - Authentication System{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">User Details</h3>
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-light btn-sm">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            {% if user_detail.profile.profile_picture %}
+                                <img src="{{ user_detail.profile.profile_picture.url }}" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-height: 200px;">
+                            {% else %}
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 200px; height: 200px;">
+                                    <span class="display-4">{{ user_detail.first_name|first|upper }}{{ user_detail.last_name|first|upper }}</span>
+                                </div>
+                            {% endif %}
+                            <h4>{{ user_detail.get_full_name }}</h4>
+                            <p class="text-muted">{{ user_detail.email }}</p>
+                            
+                            <div class="mb-3">
+                                {% if user_detail.is_active %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Inactive</span>
+                                {% endif %}
+                                
+                                {% if user_detail.is_verified %}
+                                    <span class="badge bg-info">Verified</span>
+                                {% else %}
+                                    <span class="badge bg-warning text-dark">Not Verified</span>
+                                {% endif %}
+                                
+                                {% if user_detail.is_staff %}
+                                    <span class="badge bg-warning text-dark">Staff</span>
+                                {% endif %}
+                                
+                                {% if user_detail.is_superuser %}
+                                    <span class="badge bg-dark">Admin</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="border-bottom pb-2 mb-3">Personal Information</h4>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>First Name:</strong></p>
+                                    <p>{{ user_detail.first_name }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Last Name:</strong></p>
+                                    <p>{{ user_detail.last_name }}</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Email:</strong></p>
+                                    <p>{{ user_detail.email }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Phone Number:</strong></p>
+                                    <p>{{ user_detail.phone_number|default:"Not provided" }}</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Date of Birth:</strong></p>
+                                    <p>{{ user_detail.date_of_birth|default:"Not provided" }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Member Since:</strong></p>
+                                    <p>{{ user_detail.date_joined|date:"F j, Y" }}</p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="mb-1"><strong>Address:</strong></p>
+                                <p>{{ user_detail.profile.address|default:"Not provided" }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <p class="mb-1"><strong>Bio:</strong></p>
+                                <p>{{ user_detail.profile.bio|default:"No bio provided." }}</p>
+                            </div>
+                            
+                            <h4 class="border-bottom pb-2 mb-3 mt-4">Account Activity</h4>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Last Login:</strong></p>
+                                    <p>{{ user_detail.last_login|date:"F j, Y H:i"|default:"Never" }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Account Status:</strong></p>
+                                    <p>
+                                        {% if user_detail.is_active %}
+                                            <span class="text-success">Active</span>
+                                        {% else %}
+                                            <span class="text-danger">Inactive</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Face Recognition Section -->
+                    <div class="mt-4">
+                        <h4 class="border-bottom pb-2 mb-3">Face Recognition</h4>
+                        <p class="mb-3">Upload a reference image for this user's face recognition authentication.</p>
+                        <div class="d-flex justify-content-start mb-3">
+                            <button class="btn btn-primary me-2">
+                                <i class="fas fa-camera"></i> Take Photo
+                            </button>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-images"></i> Select from Gallery
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Face Recognition Reference Image Section -->
+                    <div class="mt-4">
+                        <h4 class="border-bottom pb-2 mb-3">Reference Face Image</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% if user_detail.profile.face_image %}
+                                    <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                            <img src="{{ user_detail.profile.face_image.url }}" alt="Reference Face Image" class="img-fluid rounded" style="max-height: 200px;">
+                                        </div>
+                                        <div class="card-footer bg-light">
+                                            <small class="text-muted">Reference image used for face recognition authentication</small>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i> No reference face image has been uploaded for this user.
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Face Recognition Tips</h5>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Ensure good lighting for clear image</li>
+                                            <li class="list-group-item">Face should be centered and fully visible</li>
+                                            <li class="list-group-item">Avoid wearing glasses or face coverings</li>
+                                            <li class="list-group-item">Maintain a neutral expression</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Attendance Records Section -->
+                    <div class="mt-4">
+                        <h4 class="border-bottom pb-2 mb-3">Attendance Records</h4>
+                        <p class="mb-3">View detailed attendance history, analytics, and generate reports for this user.</p>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-calendar-check"></i> View Attendance Records
+                        </button>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            {% if user_detail.is_active %}
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-user-times"></i> Deactivate User
+                                </button>
+                            {% else %}
+                                <button class="btn btn-success">
+                                    <i class="fas fa-user-check"></i> Activate User
+                                </button>
+                            {% endif %}
+                            
+                            {% if user_detail.is_staff %}
+                                <button class="btn btn-warning">
+                                    <i class="fas fa-user-minus"></i> Remove Staff Status
+                                </button>
+                            {% else %}
+                                <button class="btn btn-info">
+                                    <i class="fas fa-user-plus"></i> Make Staff
+                                </button>
+                            {% endif %}
+                        </div>
+                        <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
